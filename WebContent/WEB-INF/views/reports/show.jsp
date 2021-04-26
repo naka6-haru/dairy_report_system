@@ -41,18 +41,18 @@
                 <c:if test="${sessionScope.login_employee.id == report.employee.id}">
                     <p><a href="<c:url value="/reports/edit?id=${report.id}" />">この日報を編集する</a></p>
                 </c:if>
+
+                <c:if test="${sessionScope.login_employee.id != report.employee.id}">
+                    <form method="post" action="<c:url value='/follows/create?id=${report.employee.id}' />">
+                        <input type="hidden" name="_token" value="${_token}" />
+                        <button type="submit">フォローする</button>
+                    </form>
+                </c:if>
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
-
-        <c:if test="${sessionScope.login_employee.id != report.employee.id}">
-            <form method="post" action="<c:url value='/follows/create?id=${report.employee.id}' />">
-                <input type="hidden" name="_token" value="${_token}" />
-                <button type="submit">フォローする</button>
-            </form>
-        </c:if>
 
         <p><a href="<c:url value="/reports/index" />">一覧に戻る</a></p>
     </c:param>
