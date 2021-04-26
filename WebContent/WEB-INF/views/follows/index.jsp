@@ -27,7 +27,7 @@
                     <tr class="row${status.count % 2}">
                         <td class="follow_id"><c:out value="${follow.follow_employee.code}"/></td>
                         <td class="follow_name"><c:out value="${follow.follow_employee.name}"></c:out></td>
-                        <td class="follow_report"><a href="<c:url value='/follows/show?=${follow.id}'/>">日報へ</a></td>
+                        <td class="follow_report"><a href="<c:url value='/follows/show?id=${follow.follow_employee.id}'/>">日報へ</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
