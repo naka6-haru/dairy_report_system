@@ -1,6 +1,7 @@
 package controllers.follows;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
 import models.Follow;
+import models.validators.FollowValidator;
 import utils.DBUtil;
 
 /**
@@ -38,15 +40,28 @@ public class FollowsCreateServlet extends HttpServlet {
             Follow f = new Follow();
             Employee e = em.find(Employee.class,Integer.parseInt(request.getParameter("id")));
 
+
             f.setFollowor_employee((Employee)request.getSession().getAttribute("login_employee"));
             f.setFollow_employee(e);
 
+            List<String> errors = FollowValidator.validate(request.getSession().getAttribute("login_employee"),f, true);
+            if(errors.size() > 0){
+                em.close();
+
+                request.setAttribute("_token", request.getSession().getId());
+                request.setAttribute("follow", f);
+                request.getSession().setAttribute("errors", errors);
+
+                response.sendRedirect(request.getContextPath() + "/follows/index");
+            }else{
                 em.getTransaction().begin();
                 em.persist(f);
                 em.getTransaction().commit();
                 em.close();
 
+                request.getSession().setAttribute("flush", "フォローしました。");
                 response.sendRedirect(request.getContextPath() + "/follows/index");
+            }
 
         }
     }

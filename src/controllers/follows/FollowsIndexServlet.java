@@ -65,6 +65,11 @@ public class FollowsIndexServlet extends HttpServlet {
             request.getSession().removeAttribute("flush");
         }
 
+        if(request.getSession().getAttribute("errors") != null){
+            request.setAttribute("errors",request.getSession().getAttribute("errors"));
+            request.getSession().removeAttribute("errors");
+        }
+
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follows/index.jsp");
         rd.forward(request, response);
     }

@@ -20,7 +20,12 @@ import javax.persistence.Table;
     @NamedQuery(
         name = "getMyFollowsCount",
         query = "SELECT COUNT(f) FROM Follow AS f WHERE f.followor_employee = :followor_employee"
-    )
+    ),
+    @NamedQuery(
+        name = "follow_employeeDuplicateCheckFlag",
+        query = "SELECT COUNT (f) FROM Follow AS f "
+                + "WHERE f.follow_employee = :follow_employee and f.followor_employee = :followor_employee"
+        )
 })
 
 @Entity
