@@ -22,12 +22,19 @@
                     <th class="follow_id">社員番号</th>
                     <th class="follow_name">氏名</th>
                     <th class="follow_report">日報</th>
+                    <th class="follow_action">操作</th>
                 </tr>
                 <c:forEach var="follow" items="${follows}" varStatus="status">
                     <tr class="row${status.count % 2}">
                         <td class="follow_id"><c:out value="${follow.follow_employee.code}"/></td>
                         <td class="follow_name"><c:out value="${follow.follow_employee.name}"></c:out></td>
                         <td class="follow_report"><a href="<c:url value='/follows/show?id=${follow.follow_employee.id}'/>">日報へ</a></td>
+                        <td class="follow_action">
+                            <form method="post" action="<c:url value='/follows/destroy?id=${follow.id}' />">
+                                <input type="hidden" name="_token" value="${_token}"/>
+                                <button type="submit">フォローをはずす</button>
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </tbody>
