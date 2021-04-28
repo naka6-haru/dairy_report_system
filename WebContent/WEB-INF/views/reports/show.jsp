@@ -45,9 +45,11 @@
                 <c:if test="${sessionScope.login_employee.id != report.employee.id}">
                     <form method="post" action="<c:url value='/follows/create?id=${report.employee.id}' />">
                         <input type="hidden" name="_token" value="${_token}" />
-                        <button type="submit">フォローする</button>
+                        <button type="submit">フォローする</button><br />
                     </form>
                 </c:if>
+                <p><a href="<c:url value="/feedback/new?id=${report.id}" />">コメント追加</a></p>
+                <p><a href="<c:url value="/feedback/index?id=${report.id}"/>">コメント一覧</a></p>
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>
