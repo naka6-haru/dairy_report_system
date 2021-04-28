@@ -24,6 +24,20 @@
                 </c:forEach>
             </tbody>
         </table>
+
+        <div id="pagination">
+            (全 ${feedback_count} 件)<br />
+            <c:forEach var="i" begin="1" end="${((feedback_count -1) / 10) + 1}" step="1">
+                <c:choose>
+                    <c:when test="${i == page}">
+                        <c:out value="${i}"/>&nbsp;
+                    </c:when>
+                    <c:otherwise>
+                        <a href="<c:url value='/feedback/index?page=${i}'/>"><c:out value="${i}" /></a>&nbsp;
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </div>
         <p><a href="<c:url value="/feedback/new?id=${report_id.id}"/>">コメント追加</a>
         <p><a href="<c:url value="/reports/show?id=${report_id.id}"/>">日報詳細に戻る</a></p>
     </c:param>
