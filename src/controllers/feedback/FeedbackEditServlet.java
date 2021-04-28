@@ -1,4 +1,4 @@
-package controllers.reports;
+package controllers.feedback;
 
 import java.io.IOException;
 
@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
-import models.Report;
+import models.Feedback;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class ReportsEditServlet
+ * Servlet implementation class FeedbackEditServlet
  */
-@WebServlet("/reports/edit")
-public class ReportsEditServlet extends HttpServlet {
+@WebServlet("/feedback/edit")
+public class FeedbackEditServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportsEditServlet() {
+    public FeedbackEditServlet() {
         super();
     }
 
@@ -34,18 +34,18 @@ public class ReportsEditServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        Report r = em.find(Report.class,Integer.parseInt(request.getParameter("id")));
+        Feedback f = em.find(Feedback.class, Integer.parseInt(request.getParameter("id")));
 
         em.close();
 
         Employee login_employee = (Employee)request.getSession().getAttribute("login_employee");
-        if(r != null && login_employee.getId() == r.getEmployee().getId()){
-            request.setAttribute("report", r);
+        if(f != null && login_employee.getId() == f.getComment_employee().getId()){
+            request.setAttribute("feedback", f);
             request.setAttribute("_token", request.getSession().getId());
+            request.setAttribute("report", f.getReport_id());
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/edit.jsp");
-        rd.forward(request,response);
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/feedback/edit.jsp");
+        rd.forward(request, response);
     }
-
 }
