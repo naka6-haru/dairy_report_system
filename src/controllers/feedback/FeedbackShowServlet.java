@@ -39,6 +39,7 @@ public class FeedbackShowServlet extends HttpServlet {
 
         request.setAttribute("feedback", f);
         request.setAttribute("report",f.getReport_id());
+        request.getSession().setAttribute("feedback_id", f.getId());
         request.setAttribute("_token", request.getSession().getId());
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/feedback/show.jsp");
