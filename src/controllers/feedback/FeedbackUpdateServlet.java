@@ -64,7 +64,7 @@ public class FeedbackUpdateServlet extends HttpServlet {
 
                 request.getSession().removeAttribute("feedback_id");
 
-                response.sendRedirect(request.getContextPath() + "/feedback/index?id=" + f.getId());
+                response.sendRedirect(request.getContextPath() + "/feedback/index?id=" + f.getReport_id().getId());
             }
         }
     }
