@@ -52,9 +52,10 @@ public class FeedbackUpdateServlet extends HttpServlet {
 
                 request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("feedback", f);
+                request.setAttribute("report", f.getReport_id());
                 request.setAttribute("errors", errors);
 
-                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/feedback/edit.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/feedback/edit.jsp");
                 rd.forward(request, response);
             }else{
                 em.getTransaction().begin();
