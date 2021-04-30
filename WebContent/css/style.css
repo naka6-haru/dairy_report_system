@@ -143,7 +143,7 @@ table#report_list .report_name{
     padding: 10px 2%;
 }
 
-table#report_ist .report_date{
+table#report_list .report_date{
     width: 20%;
 }
 
@@ -161,4 +161,47 @@ pre{
 
 h3{
     font-size: larger;
+}
+
+table#follow_list th {
+    font-weight: bold;
+    padding: 10px 2%;
+}
+
+table#follow_list .follow_name{
+    width: 27%;
+    padding: 10px 2%;
+}
+
+table#follow_list .follow_id{
+    width: 20%;
+    padding: 10px 2%;
+}
+
+table#follow_list .follow_report{
+    width: 25%;
+}
+
+table#follow_list.follow_action{
+    width: 27%;
+}
+
+table#feedback_list th{
+    font-weight: bold;
+    padding: 10px 2%;
+}
+
+table#feedback_list .comment_name {
+    width: 30%;
+    padding: 10px 2%;
+}
+
+table#feedback_list .comment {
+    width: 45%;
+    padding: 10px 2%;
+}
+
+table#feedback_list .comment_action {
+    width: 25%;
+    padding: 10px 2%;
 }
