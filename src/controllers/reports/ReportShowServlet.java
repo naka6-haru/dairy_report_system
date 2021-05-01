@@ -37,10 +37,14 @@ public class ReportShowServlet extends HttpServlet {
 
         em.close();
 
+        if(null == r){
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/show.jsp");
+            rd.forward(request, response);
+        }else{
         request.setAttribute("report", r);
         request.getSession().setAttribute("report_id", r.getId());
         request.setAttribute("_token", request.getSession().getId());
-
+        }
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/show.jsp");
         rd.forward(request, response);
     }
