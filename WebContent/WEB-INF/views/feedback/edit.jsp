@@ -23,6 +23,7 @@
                 <form method="post" action="<c:url value='/feedback/destroy?id=${feedback.id}'/>">
                     <input type="hidden" name="_token" value="${_token}" />
                 </form>
+                <p><a href="<c:url value='/feedback/index?id=${feedback.report_id.id}'/>">コメント一覧に戻る</a></p>
                 <script>
                     function confirmDestroy(){
                         if(confirm("本当に削除してよろしいですか？")){
@@ -35,7 +36,5 @@
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
-
-        <p><a href="<c:url value='/feedback/index?id=${feedback.report_id.id}'/>">コメント一覧に戻る</a></p>
     </c:param>
 </c:import>

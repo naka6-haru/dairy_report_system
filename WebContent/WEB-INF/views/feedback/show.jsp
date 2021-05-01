@@ -38,12 +38,11 @@
                 <c:if test="${sessionScope.login_employee.id == feedback.comment_employee.id}">
                     <p><a href="<c:url value="/feedback/edit?id=${feedback.id}"/>">このコメントを編集する</a></p>
                 </c:if>
-            </c:when>
-            <c:otherwise>
+                <p><a href="<c:url value="/feedback/index?id=${feedback.report_id.id}"/>">コメント一覧に戻る</a></p>
+        </c:when>
+        <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
-
-        <p><a href="<c:url value="/feedback/index?id=${feedback.report_id.id}"/>">コメント一覧に戻る</a></p>
     </c:param>
 </c:import>

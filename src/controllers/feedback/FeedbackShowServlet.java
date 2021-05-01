@@ -37,13 +37,18 @@ public class FeedbackShowServlet extends HttpServlet {
 
         em.close();
 
-        request.setAttribute("feedback", f);
-        request.setAttribute("report",f.getReport_id());
-        request.getSession().setAttribute("feedback_id", f.getId());
-        request.setAttribute("_token", request.getSession().getId());
+        if(null == f){
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/feedback/show.jsp");
+            rd.forward(request, response);
+        }else{
+            request.setAttribute("feedback", f);
+            request.setAttribute("report",f.getReport_id());
+            request.getSession().setAttribute("feedback_id", f.getId());
+            request.setAttribute("_token", request.getSession().getId());
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/feedback/show.jsp");
-        rd.forward(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/feedback/show.jsp");
+            rd.forward(request, response);
+        }
     }
 
 }

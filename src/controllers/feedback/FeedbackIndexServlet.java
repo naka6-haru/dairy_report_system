@@ -45,29 +45,36 @@ public class FeedbackIndexServlet extends HttpServlet {
 
         Report r = em.find(Report.class, Integer.parseInt(request.getParameter("id")));
 
-        List<Feedback> feedback = em.createNamedQuery("getMyAllFeedback",Feedback.class)
-                                    .setParameter("report_id",r)
-                                    .setFirstResult(10 * (page - 1))
-                                    .setMaxResults(10)
-                                    .getResultList();
+        if(null == r){
+            em.close();
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/feedback/index.jsp");
+            rd.forward(request, response);
 
-        long feedback_count = (long)em.createNamedQuery("getMyFeedbackCount",Long.class)
-                                       .setParameter("report_id",r)
-                                       .getSingleResult();
+        }else{
+            List<Feedback> feedback = em.createNamedQuery("getMyAllFeedback",Feedback.class)
+                                        .setParameter("report_id",r)
+                                        .setFirstResult(10 * (page - 1))
+                                        .setMaxResults(10)
+                                        .getResultList();
 
-        em.close();
+            long feedback_count = (long)em.createNamedQuery("getMyFeedbackCount",Long.class)
+                                           .setParameter("report_id",r)
+                                           .getSingleResult();
 
-        request.setAttribute("report_id", r);
-        request.setAttribute("feedback", feedback);
-        request.setAttribute("feedback_count", feedback_count);
-        request.setAttribute("page", page);
-        if(request.getSession().getAttribute("flush") != null){
-            request.setAttribute("flush", request.getSession().getAttribute("flush"));
-            request.getSession().removeAttribute("flush");
+            em.close();
+
+            request.setAttribute("report", r);
+            request.setAttribute("feedback", feedback);
+            request.setAttribute("feedback_count", feedback_count);
+            request.setAttribute("page", page);
+            if(request.getSession().getAttribute("flush") != null){
+                request.setAttribute("flush", request.getSession().getAttribute("flush"));
+                request.getSession().removeAttribute("flush");
+            }
+
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/feedback/index.jsp");
+            rd.forward(request, response);
         }
-
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/feedback/index.jsp");
-        rd.forward(request, response);
     }
 
 }
